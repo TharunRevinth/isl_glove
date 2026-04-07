@@ -1,0 +1,140 @@
+:root {
+    --bg: #fdfaf7;
+    --card: rgba(255, 255, 255, 0.85);
+    --border: rgba(0,0,0,0.04);
+    --accent: #849683;
+    --accent-alt: #d9bfa9;
+    --text: #2c2c2c;
+    --text-muted: #6b7280;
+    --v-shadow: 0 10px 40px rgba(0,0,0,0.04);
+}
+
+body.dark-mode {
+    --bg: #030712;
+    --card: rgba(17, 24, 39, 0.7);
+    --border: rgba(255, 255, 255, 0.08);
+    --accent: #a7f3d0;
+    --accent-alt: #fbbf24;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --v-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+* { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+body {
+    margin: 0; padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+}
+
+/* NAVIGATION FIX: Horizontal, No Bullets */
+.nav-pill {
+    height: 80px; padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--card); backdrop-filter: blur(20px);
+    border-bottom: 2px solid var(--border);
+    z-index: 1000;
+}
+
+.brand { font-size: 1.4rem; font-weight: 800; color: var(--accent); }
+
+.nav-links { 
+    display: flex; 
+    gap: 32px; 
+    list-style: none; /* Removes Bullets */
+    margin: 0; 
+    padding: 0; 
+}
+
+.nav-links li { 
+    font-size: 0.85rem; 
+    font-weight: 800; 
+    color: var(--text-muted); 
+    cursor: pointer; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-links li.active { color: var(--accent); }
+
+/* APP SHELL STABILITY */
+.app-shell {
+    padding: 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.soft-card {
+    background: var(--card);
+    backdrop-filter: blur(30px);
+    border: 2px solid var(--border);
+    box-shadow: var(--v-shadow);
+    border-radius: 40px !important;
+    padding: 40px;
+    display: flex; flex-direction: column;
+    min-height: 350px;
+}
+
+.output-hero { grid-column: 1 / -1; min-height: 300px; align-items: center; justify-content: center; text-align: center; }
+.interpretation-main { font-size: clamp(3rem, 12vw, 7rem); font-weight: 900; color: var(--accent); margin: 0; }
+
+/* VISUAL COACH RE-SCALE: Making it much larger and centered */
+.hand-visualizer {
+    flex-grow: 1;
+    display: flex; justify-content: center; align-items: flex-end;
+    padding-bottom: 60px; /* Space for the wrist */
+    position: relative;
+    min-height: 300px;
+}
+
+.finger-bone {
+    width: 32px; /* Wider fingers */
+    background: rgba(0,0,0,0.03); 
+    margin: 0 12px;
+    border: 2.5px solid var(--border); 
+    border-radius: 100px !important;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Correcting individual finger heights for a balanced look */
+#gf-0 { height: 90px; transform: rotate(-25deg); position: relative; left: -15px; }
+#gf-1 { height: 180px; }
+#gf-2 { height: 210px; }
+#gf-3 { height: 180px; }
+#gf-4 { height: 130px; }
+
+.finger-bone.active {
+    height: 70px !important; /* The "Bent" height */
+    background: var(--accent-alt);
+    box-shadow: 0 15px 40px var(--accent-alt);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.wrist-block {
+    position: absolute; bottom: 0; width: 240px; height: 70px;
+    background: var(--card); border: 2.5px solid var(--border);
+    border-radius: 30px 30px 0 0 !important;
+    z-index: -1;
+}
+
+/* Theme Toggle Fix */
+.theme-toggle { width: 54px; height: 28px; background: rgba(0,0,0,0.1); border-radius: 100px !important; position: relative; cursor: pointer; }
+.toggle-dot { width: 22px; height: 22px; background: var(--accent); position: absolute; top: 3px; left: 3px; border-radius: 50% !important; }
+body.dark-mode .toggle-dot { transform: translateX(26px); }
+
+@media (max-width: 800px) {
+    .nav-pill { height: auto; padding: 20px; flex-direction: column; gap: 16px; text-align: center; }
+    .nav-links { gap: 20px; }
+    .interpretation-main { font-size: 3.5rem; }
+    .hand-visualizer { transform: scale(0.8); }
+}
+
+.hidden { display: none !important; }

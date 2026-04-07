@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ISL Pro | Humane Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#fdfaf7">
+</head>
+<body class="light-mode">
+
+    <!-- Stabilized Horizontal Navigation -->
+    <nav class="nav-pill">
+        <div class="brand">
+            ISL<span>PRO</span>
+        </div>
+        <ul id="nav-links" class="nav-links">
+            <li class="link active" id="btn-dash">INTERPRET</li>
+            <li class="link" id="btn-academy">ACADEMY</li>
+        </ul>
+        <div style="display: flex; gap: 24px; align-items: center;">
+            <!-- Simple Theme Toggle -->
+            <div id="theme-btn" class="theme-toggle">
+                <div class="toggle-dot"></div>
+            </div>
+            <button id="ble-trigger" style="background: var(--accent); color: white; border: none; padding: 12px 28px; font-size: 0.85rem; font-weight: 800; cursor: pointer; border-radius: 100px !important; letter-spacing: 1px;">CON_BLE</button>
+        </div>
+    </nav>
+
+    <!-- App Content Holder -->
+    <main id="app-shell" class="app-shell">
+        
+        <!-- Dashboard Section -->
+        <div id="view-dash" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; width: 100%;">
+            
+            <div class="soft-card output-hero">
+                <p style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; letter-spacing: 3px; margin-bottom: 24px; text-transform: uppercase;">Real-time Interpretation</p>
+                <h1 id="out-word" class="interpretation-main">HELLO</h1>
+                <div style="margin-top: 32px; border-top: 2px solid var(--border); padding-top: 24px; width: 100%; display: flex; justify-content: center; gap: 16px;">
+                    <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 12px; cursor: pointer; color: var(--text-muted); font-weight: 700;">
+                        <input type="checkbox" id="tts-active" checked style="accent-color: var(--accent); transform: scale(1.3);"> AUDIBLE VOICE_OUT
+                    </label>
+                </div>
+            </div>
+
+            <div class="soft-card">
+                <p style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; margin-bottom: 24px; text-transform: uppercase; border-bottom: 2px solid var(--border); padding-bottom: 12px;">Interpretation History</p>
+                <div id="log-list" style="display: flex; flex-direction: column; gap: 16px;"></div>
+            </div>
+
+            <div class="soft-card">
+                <p style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; margin-bottom: 24px; text-transform: uppercase; border-bottom: 2px solid var(--border); padding-bottom: 12px;">Sensor System Status</p>
+                <div class="gauge-row">
+                    <div class="gauge-box"><div class="track"><div id="bar-0" class="fill" style="height: 0%"></div></div><p id="bi-0" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-1" class="fill" style="height: 0%"></div></div><p id="bi-1" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-2" class="fill" style="height: 0%"></div></div><p id="bi-2" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-3" class="fill" style="height: 0%"></div></div><p id="bi-3" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-4" class="fill" style="height: 0%"></div></div><p id="bi-4" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
+                </div>
+                <div style="display: flex; justify-content: space-around; margin-top: 16px; font-size: 0.6rem; color: var(--text-muted); font-weight: 800;">
+                    <span>T</span><span>I</span><span>M</span><span>R</span><span>P</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academy Section -->
+        <div id="view-academy" class="hidden" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; width: 100%;">
+            <div class="soft-card" style="text-align: center; justify-content: center;">
+                <span style="font-size: 0.8rem; color: var(--accent-alt); font-weight: 800; letter-spacing: 2px;">PERFORM LESSON</span>
+                <h1 id="ac-word" style="font-size: 3.5rem; color: var(--accent); font-weight: 900; margin: 24px 0;">READY</h1>
+                <div id="ac-fb" style="background: rgba(0,0,0,0.02); padding: 14px; font-size: 0.8rem; border: 2px solid var(--border); border-radius: 100px !important;">WAITING FOR GESTURE...</div>
+                <div style="margin-top: 40px; text-align: center;">
+                    <p style="font-size: 0.7rem; color: var(--text-muted); font-weight: 800;">TOTAL_SCORE</p>
+                    <h2 id="ac-score" style="font-size: 3.5rem; color: var(--accent); font-weight: 900; margin: 4px 0;">0</h2>
+                </div>
+            </div>
+
+            <div class="soft-card" style="position: relative;">
+                <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; margin-bottom: 24px; text-transform: uppercase;">Instructional Visual Coach</span>
+                <div class="hand-visualizer">
+                    <div id="gf-0" class="finger-bone"></div>
+                    <div id="gf-1" class="finger-bone"></div>
+                    <div id="gf-2" class="finger-bone"></div>
+                    <div id="gf-3" class="finger-bone"></div>
+                    <div id="gf-4" class="finger-bone"></div>
+                    <!-- New Wrist Block Class -->
+                    <div class="wrist-block"></div>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--accent); text-align: center; font-weight: 800;">HIGHLIGHTED_GLOW = BENT</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
