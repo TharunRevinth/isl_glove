@@ -30,37 +30,58 @@ const wordOutput = document.getElementById('out-word');
 const logList = document.getElementById('log-list');
 const themeBtn = document.getElementById('theme-btn');
 
+let lastUpdate = Date.now();
+
 // 1. Bluetooth Management
 async function initBLE() {
     try {
         console.log("Searching for ISL_Glove_Pro...");
+        statusPill.innerText = "SEARCHING";
+        statusPill.style.background = "var(--accent-alt)";
+        
         bleDevice = await navigator.bluetooth.requestDevice({
             filters: [{ name: 'ISL_Glove_Pro' }],
             optionalServices: [S_UUID]
         });
 
-        statusPill.innerText = "LINKING...";
+        statusPill.innerText = "CONNECTING";
         const server = await bleDevice.gatt.connect();
         const service = await server.getPrimaryService(S_UUID);
         bleChar = await service.getCharacteristic(C_UUID);
 
         await bleChar.startNotifications();
         bleChar.addEventListener('characteristicvaluechanged', (ev) => {
+            const now = Date.now();
+            const latency = now - lastUpdate;
+            document.getElementById('stat-latency').innerText = `${latency}ms`;
+            lastUpdate = now;
+
             const dataStr = new TextDecoder().decode(ev.target.value);
-            try { if (dataStr.startsWith('{')) handleGloveUpdate(JSON.parse(dataStr)); } catch(err) { }
+            try { 
+                if (dataStr.startsWith('{')) handleGloveUpdate(JSON.parse(dataStr)); 
+            } catch(err) { 
+                console.error("JSON Parse Error", err);
+            }
         });
 
-        statusPill.innerText = "LINKED";
+        statusPill.innerText = "STABLE";
+        statusPill.style.background = "var(--accent)";
+        statusPill.style.color = "white";
         bleToggle.innerText = "LINKED";
         bleToggle.style.background = "var(--accent-alt)";
         
         bleDevice.addEventListener('gattserverdisconnected', () => { 
             statusPill.innerText = "OFFLINE";
+            statusPill.style.background = "var(--border)";
+            statusPill.style.color = "var(--text-muted)";
             bleToggle.innerText = "CON_BLE";
+            bleToggle.style.background = "var(--accent)";
         });
     } catch (err) {
         console.error("BLE Connect failed", err);
         statusPill.innerText = "ERROR";
+        statusPill.style.background = "#ef4444";
+        statusPill.style.color = "white";
     }
 }
 
@@ -68,12 +89,19 @@ async function initBLE() {
 function handleGloveUpdate(payload) {
     const { f, r, w } = payload; // fingers, raw, word
 
-    // Update Dashboard Gauges
+    // Update Dashboard Telemetry
     f.forEach((bit, i) => {
         const bar = document.getElementById(`bar-${i}`);
         const bi = document.getElementById(`bi-${i}`);
-        bar.style.height = `${(r[i] / 40.95)}%`;
-        bi.innerText = `${bit === 1 ? "BENT" : "---"}`;
+        const val = document.getElementById(`val-${i}`);
+        
+        // Normalize 12-bit ADC (0-4095) to percentage
+        const percent = Math.min(100, Math.max(0, (r[i] / 40.95)));
+        bar.style.height = `${percent}%`;
+        
+        bi.innerText = `${bit === 1 ? "BENT" : "FLAT"}`;
+        bi.style.color = bit === 1 ? "var(--accent)" : "var(--text-muted)";
+        val.innerText = r[i];
     });
 
     // Word Logic

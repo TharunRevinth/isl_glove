@@ -130,6 +130,33 @@ body {
 .toggle-dot { width: 22px; height: 22px; background: var(--accent); position: absolute; top: 3px; left: 3px; border-radius: 50% !important; }
 body.dark-mode .toggle-dot { transform: translateX(26px); }
 
+/* GAUGE SYSTEM */
+.gauge-row {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    height: 180px; padding: 10px 0;
+}
+
+.gauge-box { flex: 1; display: flex; flex-direction: column; align-items: center; }
+
+.track {
+    width: 28px; height: 120px; background: rgba(0,0,0,0.03);
+    border-radius: 100px; position: relative; overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+body.dark-mode .track { background: rgba(255,255,255,0.03); }
+
+.fill {
+    width: 100%; position: absolute; bottom: 0;
+    background: linear-gradient(to top, var(--accent), var(--accent-alt));
+    border-radius: 100px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.tech-stat { display: flex; flex-direction: column; gap: 4px; }
+.tech-stat label { font-size: 0.55rem; color: var(--text-muted); font-weight: 800; letter-spacing: 1.5px; }
+.tech-stat span { font-size: 0.85rem; font-weight: 900; color: var(--text); }
+
 @media (max-width: 800px) {
     .nav-pill { height: auto; padding: 20px; flex-direction: column; gap: 16px; text-align: center; }
     .nav-links { gap: 20px; }

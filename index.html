@@ -50,16 +50,43 @@
             </div>
 
             <div class="soft-card">
-                <p style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; margin-bottom: 24px; text-transform: uppercase; border-bottom: 2px solid var(--border); padding-bottom: 12px;">Sensor System Status</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border); padding-bottom: 12px; margin-bottom: 24px;">
+                    <p style="font-size: 0.65rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin: 0;">Sensor Telemetry</p>
+                    <span id="status-chip" style="font-size: 0.55rem; background: var(--border); padding: 4px 10px; border-radius: 100px; font-weight: 900; letter-spacing: 1px;">OFFLINE</span>
+                </div>
                 <div class="gauge-row">
-                    <div class="gauge-box"><div class="track"><div id="bar-0" class="fill" style="height: 0%"></div></div><p id="bi-0" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
-                    <div class="gauge-box"><div class="track"><div id="bar-1" class="fill" style="height: 0%"></div></div><p id="bi-1" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
-                    <div class="gauge-box"><div class="track"><div id="bar-2" class="fill" style="height: 0%"></div></div><p id="bi-2" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
-                    <div class="gauge-box"><div class="track"><div id="bar-3" class="fill" style="height: 0%"></div></div><p id="bi-3" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
-                    <div class="gauge-box"><div class="track"><div id="bar-4" class="fill" style="height: 0%"></div></div><p id="bi-4" style="font-size: 0.6rem; text-align: center; margin-top: 12px;"></p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-0" class="fill" style="height: 0%"></div></div><p id="bi-0" style="font-size: 0.6rem; text-align: center; margin-top: 12px; font-weight: 800;"></p><p id="val-0" style="font-size: 0.5rem; opacity: 0.5; text-align: center;">0</p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-1" class="fill" style="height: 0%"></div></div><p id="bi-1" style="font-size: 0.6rem; text-align: center; margin-top: 12px; font-weight: 800;"></p><p id="val-1" style="font-size: 0.5rem; opacity: 0.5; text-align: center;">0</p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-2" class="fill" style="height: 0%"></div></div><p id="bi-2" style="font-size: 0.6rem; text-align: center; margin-top: 12px; font-weight: 800;"></p><p id="val-2" style="font-size: 0.5rem; opacity: 0.5; text-align: center;">0</p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-3" class="fill" style="height: 0%"></div></div><p id="bi-3" style="font-size: 0.6rem; text-align: center; margin-top: 12px; font-weight: 800;"></p><p id="val-3" style="font-size: 0.5rem; opacity: 0.5; text-align: center;">0</p></div>
+                    <div class="gauge-box"><div class="track"><div id="bar-4" class="fill" style="height: 0%"></div></div><p id="bi-4" style="font-size: 0.6rem; text-align: center; margin-top: 12px; font-weight: 800;"></p><p id="val-4" style="font-size: 0.5rem; opacity: 0.5; text-align: center;">0</p></div>
                 </div>
                 <div style="display: flex; justify-content: space-around; margin-top: 16px; font-size: 0.6rem; color: var(--text-muted); font-weight: 800;">
-                    <span>T</span><span>I</span><span>M</span><span>R</span><span>P</span>
+                    <span>THUMB</span><span>INDEX</span><span>MIDDLE</span><span>RING</span><span>PINKY</span>
+                </div>
+            </div>
+
+            <div class="soft-card" style="grid-column: 1 / -1; min-height: auto; padding: 24px 40px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 32px;">
+                        <div class="tech-stat">
+                            <label>LATENCY</label>
+                            <span id="stat-latency">400ms</span>
+                        </div>
+                        <div class="tech-stat">
+                            <label>PROTOCOL</label>
+                            <span>BLE GATT</span>
+                        </div>
+                        <div class="tech-stat">
+                            <label>MCU</label>
+                            <span>ESP32-WROOM</span>
+                        </div>
+                        <div class="tech-stat">
+                            <label>ADC RES</label>
+                            <span>12-BIT</span>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.65rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">SYSTEM_STABLE</div>
                 </div>
             </div>
         </div>
